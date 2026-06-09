@@ -593,7 +593,9 @@ footer, header { display: none !important; }
 
 .gr-textbox textarea {
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
-  font-size: 12px !important; line-height: 1.6 !important; color: var(--text-dim) !important;
+  font-size: 13px !important; line-height: 1.7 !important;
+  color: #e2e8f0 !important;
+  background: #0f172a !important;
 }
 
 .gr-image { border-radius: var(--radius) !important; overflow: hidden !important; }
@@ -742,8 +744,10 @@ def build_app():
                 with gr.Group(elem_classes=["gr-box"]):
                     gr.Markdown("### 📜 处理日志")
                     log_output = gr.Textbox(
-                        label="", lines=10, max_lines=20, interactive=False,
+                        label="",
+                        lines=10, max_lines=20, interactive=False,
                         value="[系统] 🎉 欢迎使用图像分割分析系统\n[系统] 📌 请选择模型并上传数据开始处理",
+                        elem_classes=["log-textbox"],
                     )
 
         # ── 事件绑定 ──
