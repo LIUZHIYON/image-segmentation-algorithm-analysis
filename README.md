@@ -147,6 +147,8 @@ E:\anaconda3\envs\openmmlab\python.exe web_ui.py
 
 ### 5️⃣ 使用界面
 
+![Web界面截图](assets/web_screenshot.png)
+
 | 功能 | 操作 |
 |------|------|
 | 📷 **图片分割** | 左侧选模型 → 切换到"图片分割"标签 → 上传图片 → 点"开始分割" |
