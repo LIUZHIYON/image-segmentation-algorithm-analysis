@@ -33,3 +33,26 @@ wandb/
 
 # MLflow
 mlruns/
+
+# ========== 数据集 (不上传) ==========
+Detecrtron2_Custom_Dataset/
+
+# yolo_bishe 训练数据集
+yolo_bishe_seg/train/
+yolo_bishe_seg/val/
+
+# yolov11_custom_segmentation 训练数据
+yolov11_custom_segmentation/train/
+yolov11_custom_segmentation/val/
+yolov11_custom_segmentation/detectron_ckps/
+
+# mmsegmentation tutorials & 数据集
+mmsegmentation-main/Watermelon87_Semantic_Seg_Mask/
+mmsegmentation-main/图表/
+mmsegmentation-main/20230816_*/
+mmsegmentation-main/Zihao-Configs/
+mmsegmentation-main/1.png
+mmsegmentation-main/2.jpg
+mmsegmentation-main/3.jpg
+mmsegmentation-main/CITATION.cff
+mmsegmentation-main/LICENSE
