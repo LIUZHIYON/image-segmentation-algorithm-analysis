@@ -1,0 +1,6 @@
+train: E:\bishe_custom_data\yolo_bishe_seg\train
+val: E:\bishe_custom_data\yolo_bishe_seg\val
+
+nc: 4
+
+names: ["person","roadheader","robot","shearer"]

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+
+# Model weights
+*.pth
+*.pt
+*.pkl
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker artifacts
+.dockerignore
+
+# Docs build
+site/
+
+# Jupyter notebooks checkpoint
+.ipynb_checkpoints/

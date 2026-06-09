@@ -1,0 +1,6 @@
+train: E:\bishe_custom_data\yolov11_custom_segmentation\train
+val: E:\bishe_custom_data\yolov11_custom_segmentation\val
+
+nc: 4
+
+names: ["person","roadheader","robot","shearer"]
