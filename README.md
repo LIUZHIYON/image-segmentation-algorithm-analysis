@@ -62,7 +62,9 @@
 │   ├── ultralytics/                   #   Ultralytics 核心代码
 │   └── examples/                      #   部署示例（ONNX / OpenVINO / TFLite）
 │
-├── README.md                          # 📄 本文件
+├── web_ui.py                          # 🌐 Web 统一界面（Gradio）
+├── outputs/                          # 📂 分割结果保存目录
+├── README.md                         # 📄 本文件
 └── .gitignore
 ```
 
@@ -170,10 +172,27 @@ python train.py
 
 ---
 
+## 🌐 Web 统一界面（推荐）
+
+运行下面命令即可打开浏览器使用统一的 Web 界面：
+
+```bash
+python web_ui.py
+```
+
+访问 `http://localhost:7860`，支持：
+- ✅ **模型选择** — 在 4 个模型间自由切换
+- ✅ **图片分割** — 上传图片，一键分割
+- ✅ **视频分割** — 上传视频，逐帧处理并导出
+- ✅ **摄像头实时分割** — 打开摄像头实时预览
+- ✅ **结果保存** — 分割图片可保存到 `outputs/` 目录
+- ✅ **日志面板** — 记录每次处理的详细信息
+
 ## 🛠️ 核心功能亮点
 
 - ✅ **多框架统一入口** — 一个项目中体验 YOLOv11 / Detectron2 / MMSegmentation
 - ✅ **QT 可视化界面** — `main10.py` / `main12.py`，加载模型实时推理
+- ✅ **Web 统一界面** — `web_ui.py`，Gradio 构建，浏览器即可使用
 - ✅ **自动标注工具** — 利用预训练模型 + SAM 生成训练标注，减少人工成本
 - ✅ **部署示例** — ONNX Runtime / OpenVINO / TFLite 等多平台推理
 - ✅ **对比分析** — 同一数据集、统一指标，公平对比各算法

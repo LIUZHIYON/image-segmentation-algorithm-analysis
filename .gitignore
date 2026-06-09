@@ -81,3 +81,6 @@ mmsegmentation-main/main6.py
 mmsegmentation-main/main7.py
 mmsegmentation-main/main8.py
 mmsegmentation-main/main9.py
+
+# Web 界面输出
+outputs/
