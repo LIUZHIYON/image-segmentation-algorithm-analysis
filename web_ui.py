@@ -564,8 +564,6 @@ def build_app():
             fn=process_webcam,
             inputs=[model_selector, webcam_input],
             outputs=[webcam_output, log_output],
-            time_limit=60,
-            concurrency_limit=2
         )
 
     return demo
