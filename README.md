@@ -7,27 +7,27 @@
 
 ## 🧭 项目简介
 
-图像分割是计算机视觉的核心任务之一。本毕业设计系统性地研究了当前主流的图像分割算法，涵盖 **语义分割** 与 **实例分割** 两大方向，在同一个自定义数据集上进行训练、评估和对比分析。
+本毕业设计系统性地研究并实现了当前主流的图像分割算法，涵盖**语义分割**与**实例分割**两大方向，并提供统一 Web 界面进行对比演示。
 
-### 涉及的算法框架
+### 支持模型（5 种）
 
-| 框架 / 算法 | 类型 | 项目模块 |
-|------------|------|---------|
-| **YOLOv11-seg** (Ultralytics) | ⚡ 实时实例分割 | `yolo_bishe_seg/` |
-| **Mask R-CNN** (Detectron2) | 🎯 高精度实例分割 | `yolov11_custom_segmentation/` |
-| **DeepLabV3+** | 🧩 语义分割 | `yolov11_custom_segmentation/deeplab.py` |
-| **PSPNet** | 🧩 语义分割 | `mmsegmentation-main/` |
-| **SegFormer** | 🧩 语义分割 (Transformer) | `mmsegmentation-main/` |
-| **SAM** (Meta) | 🪄 通用分割大模型 | `yolo_bishe_seg/sam_predict.py` |
+| 模型 | 类型 | 框架 | 特点 |
+|------|------|------|------|
+| **DeepLabV3+** | 🧩 语义分割 | MMSegmentation | 空洞卷积，边缘精细 |
+| **PSPNet** | 🏗️ 语义分割 | MMSegmentation | 金字塔池化，场景理解好 |
+| **SegFormer** | 🤖 语义分割 | MMSegmentation | Transformer 架构，SOTA 精度 |
+| **YOLOv11** | ⚡ 实例分割 | Ultralytics | 实时推理，速度最快 |
+| **Mask R-CNN** | 🎯 实例分割 | Detectron2 | 高精度，掩码精细 |
 
 ### 目标类别
 
-| 类别 | 说明 |
-|------|------|
-| `person` | 井下工作人员 |
-| `roadheader` | 掘进机 |
-| `shearer` | 采煤机 |
-| `robot` | 巡检机器人 |
+| 类别 | 英文名 | 说明 |
+|------|--------|------|
+| 🟫 background | `background` | 背景区域 |
+| 🟥 person | `person` | 井下工作人员 |
+| 🟩 roadheader | `roadheader` | 掘进机 |
+| 🟦 robot | `robot` | 巡检机器人 |
+| 🟨 shearer | `shearer` | 采煤机 |
 
 ---
 
@@ -35,49 +35,39 @@
 
 ```
 .
-├── mmsegmentation-main/               # 📦 MMSegmentation — 语义分割实验
-│   ├── main10.py                      #   QT 可视化界面（推理 + 结果展示）
-│   ├── configs/                       #   模型配置文件（PSPNet / SegFormer 等）
-│   ├── mmseg/                         #   MMSegmentation 核心代码
-│   ├── tools/                         #   训练 / 测试 / 推理脚本
-│   ├── demo/                          #   演示示例
-│   └── outputs/                       #   训练输出
+├── web_ui.py                           # 🌐 Web 统一界面（Gradio）⭐ 推荐入口
+├── run_web_ui.bat                      # 🚀 一键启动脚本
+├── outputs/                            # 📂 分割结果保存目录
 │
-├── yolov11_custom_segmentation/       # 📦 Detectron2 — 实例分割实验
-│   ├── main12.py                      #   QT 可视化界面（模型推理与可视化）
-│   ├── detectron2/                    #   Detectron2 核心代码
-│   ├── deeplab.py                     #   DeepLabV3+ 实现
-│   ├── configs/                       #   Detectron2 配置文件
-│   ├── custom_datasets.yaml           #   自定义数据集注册
-│   ├── classes.txt                    #   类别定义文件
-│   ├── predict.py                     #   预测脚本
-│   └── train.py                       #   训练脚本
+├── mmsegmentation-main/                # 📦 MMSegmentation 语义分割
+│   ├── Zihao-Configs/                  #   自定义数据集配置文件
+│   ├── work_dirs/                      #   训练好的权重文件
+│   ├── mmseg/                          #   MMSegmentation 核心代码
+│   └── main10.py                       #   QT 桌面界面（语义分割）
 │
-├── yolo_bishe_seg/                    # 📦 Ultralytics YOLOv11 — 实时分割
-│   ├── train.py / train2.py           #   训练脚本
-│   ├── predict.py / predict2.py       #   推理脚本
-│   ├── sam_predict.py                 #   SAM 大模型推理
-│   ├── Auto-Annotation.py             #   自动标注工具
-│   ├── person.yaml                    #   数据集配置
-│   ├── ultralytics/                   #   Ultralytics 核心代码
-│   └── examples/                      #   部署示例（ONNX / OpenVINO / TFLite）
+├── yolov11_custom_segmentation/        # 📦 Detectron2 + YOLOv11 实例分割
+│   ├── detectron2/                     #   Detectron2 核心代码
+│   ├── detectron_ckps/                 #   Mask R-CNN 权重
+│   ├── runs/segment/train6/weights/    #   YOLOv11 训练权重
+│   ├── configs/                        #   Detectron2 配置文件
+│   ├── deeplab.py                      #   DeepLabV3+ 独立实现
+│   └── main12.py                       #   QT 桌面界面（实例分割）
 │
-├── web_ui.py                          # 🌐 Web 统一界面（Gradio）
-├── outputs/                          # 📂 分割结果保存目录
-├── README.md                         # 📄 本文件
-└── .gitignore
+└── yolo_bishe_seg/                     # 📦 Ultralytics YOLO 实验
+    ├── train.py                        #   训练脚本
+    ├── predict.py                      #   推理脚本
+    └── sam_predict.py                  #   SAM 大模型推理
 ```
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始（Web 界面）
 
-### 环境要求
+### 前置条件
 
-- **Python** 3.8 – 3.11
-- **PyTorch** ≥ 1.10（推荐 2.0+）
-- **CUDA** 11.3+（GPU 训练/推理，推荐）
-- **操作系统** Windows / Linux
+- **操作系统**: Windows 10/11（Linux 同理）
+- **CUDA**: NVIDIA GPU + CUDA 11.7+（可选，CPU 也可运行但较慢）
+- **Anaconda**: 需要 conda 环境管理
 
 ### 1️⃣ 克隆仓库
 
@@ -86,124 +76,171 @@ git clone https://github.com/LIUZHIYON/image-segmentation-algorithm-analysis.git
 cd image-segmentation-algorithm-analysis
 ```
 
-### 2️⃣ 安装依赖
+### 2️⃣ 配置 Python 环境
 
-根据你想使用的模块选择安装：
+项目需要 **Python 3.8 + PyTorch + CUDA** 环境。推荐使用已有的 `openmmlab` conda 环境，或按以下步骤新建：
 
-```bash
-# ⚡ YOLOv11（推荐先试这个，最简单）
-pip install ultralytics
-# 或进入子目录
-cd yolo_bishe_seg
-pip install -r requirements.txt   # 如有
-```
+<details>
+<summary><b>方案 A：新建环境（如果还没有 openmmlab）</b></summary>
 
 ```bash
-# 🎯 Detectron2（需要编译）
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
-pip install opencv-python pyqt5
-cd yolov11_custom_segmentation
-pip install -e detectron2/
-```
+# 1. 创建 conda 环境
+conda create -n openmmlab python=3.8 -y
+conda activate openmmlab
 
-```bash
-# 🧩 MMSegmentation
+# 2. 安装 PyTorch (CUDA 11.7)
+pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu117
+
+# 3. 安装 MMSegmentation
 pip install openmim
-mim install mmengine
-cd mmsegmentation-main
-pip install -v -e .
+mim install mmengine mmcv==2.1.0
+cd mmsegmentation-main && pip install -v -e . && cd ..
+
+# 4. 安装 Gradio Web 框架
+pip install gradio==4.44.1
+
+# 5. 安装 Ultralytics (YOLOv11)
+pip install ultralytics
+
+# 6. 安装 Detectron2 依赖
+pip install fvcore iopath yacs cloudpickle omegaconf
 ```
 
-### 3️⃣ 准备数据
+</details>
 
-- 准备自定义数据集（图片 + COCO/YOLO 格式标注）
-- 根据使用的模块修改对应的配置文件：
-  - `yolov11_custom_segmentation/custom_datasets.yaml`
-  - `yolo_bishe_seg/person.yaml`
-  - `mmsegmentation-main/configs/` 下对应的配置文件
-
-### 4️⃣ 运行推理
+<details>
+<summary><b>方案 B：使用已有 openmmlab 环境（补充依赖）</b></summary>
 
 ```bash
-# 🖼️ YOLOv11 单张图片推理
-cd yolo_bishe_seg
-python predict.py --source demo.jpg
+conda activate openmmlab
 
-# 🖥️ QT 可视化界面（Detectron2）
-cd yolov11_custom_segmentation
-python main12.py
-
-# 🖥️ QT 可视化界面（MMSegmentation）
-cd mmsegmentation-main
-python main10.py
-
-# 🪄 SAM 通用分割
-cd yolo_bishe_seg
-python sam_predict.py --image demo.jpg
+# 如果缺少以下依赖，按需安装：
+pip install gradio ultralytics fvcore iopath yacs cloudpickle omegaconf
 ```
 
-### 5️⃣ 训练模型
+</details>
+
+### 3️⃣ 验证环境
 
 ```bash
-# YOLOv11-seg 训练
-cd yolo_bishe_seg
-python train.py
+# 确保使用 openmmlab 环境的 Python
+E:\anaconda3\envs\openmmlab\python.exe -c "
+import mmcv, mmseg, ultralytics, gradio, detectron2, torch
+print('✅ 所有依赖就绪')
+print(f'   torch={torch.__version__}  CUDA={torch.cuda.is_available()}')
+"
+```
 
-# Mask R-CNN 训练
-cd yolov11_custom_segmentation
-python train.py
+### 4️⃣ 启动 Web 界面
+
+**方式一：双击运行**（推荐）
+
+直接双击项目目录下的 `run_web_ui.bat`
+
+**方式二：命令行运行**
+
+```bash
+E:\anaconda3\envs\openmmlab\python.exe web_ui.py
+```
+
+启动后浏览器自动打开 **http://localhost:7860**。
+
+### 5️⃣ 使用界面
+
+| 功能 | 操作 |
+|------|------|
+| 📷 **图片分割** | 左侧选模型 → 切换到"图片分割"标签 → 上传图片 → 点"开始分割" |
+| 🎬 **视频分割** | 左侧选模型 → 切换到"视频分割"标签 → 上传视频 → 点"开始处理视频" |
+| 📹 **摄像头** | 左侧选模型 → 切换到"摄像头实时分割"标签 → 开启摄像头 |
+| 💾 **保存结果** | 分割完成后点"保存"，结果保存到 `outputs/` 目录 |
+
+---
+
+## 🔧 界面截图说明
+
+启动后的 Web 界面布局：
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  🎯 图像分割算法分析与应用                               │
+│  统一管理 5 种分割模型 · 支持图片/视频/摄像头             │
+├──────────┬──────────────────────────────────────────────┤
+│ ⚙️ 模型  │  [📷 图片分割] [🎬 视频分割] [📹 摄像头]     │
+│ 配置     │                                              │
+│          │  ┌─────────────┐  ┌─────────────┐           │
+│ [下拉框] │  │  原始图片    │  │  分割结果    │           │
+│ 选择模型 │  │             │  │             │           │
+│          │  └─────────────┘  └─────────────┘           │
+│ 📋 使用  │  [🚀 开始分割] [💾 保存] [🗑️ 清空]          │
+│ 说明     │                                              │
+│          │  📜 处理日志                                 │
+│ 📊 类别  │  [11:30:01] 📷 开始处理图片 — DeepLabV3+     │
+│ 信息     │  [11:30:05] 🟢 person: 12.3%                │
+│          │  [11:30:05] ✅ 语义分割完成                  │
+│ 💾 保存  │                                              │
+└──────────┴──────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📊 实验结论
+## 🧪 实验结论
 
 在煤矿井下自定义数据集上的对比结果：
 
-| 算法 | 推理速度 | 精度 | 特点 |
-|------|---------|------|------|
-| **YOLOv11-seg** | ⚡⚡⚡⚡⚡ | 较高 | 实时性最佳，适合部署 |
-| **Mask R-CNN** | ⚡⚡ | ⭐⭐⭐⭐⭐ | 精度最高，掩码更精细 |
-| **DeepLabV3+** | ⚡⚡⚡ | ⭐⭐⭐⭐ | 语义分割边缘平滑 |
-| **PSPNet** | ⚡⚡ | ⭐⭐⭐⭐ | 金字塔池化，场景理解好 |
-| **SegFormer** | ⚡⚡⚡ | ⭐⭐⭐⭐⭐ | Transformer，光照鲁棒 |
-
-> 详细指标和各模型对比请参考各子目录的 README。
+| 算法 | 推理速度 | 精度 | 参数量 | 适用场景 |
+|------|---------|------|--------|---------|
+| **YOLOv11-seg** | ⚡⚡⚡⚡⚡ | ⭐⭐⭐ | 小 | 实时监控、嵌入式部署 |
+| **Mask R-CNN** | ⚡⚡ | ⭐⭐⭐⭐⭐ | 大 | 离线高精度分析 |
+| **DeepLabV3+** | ⚡⚡⚡ | ⭐⭐⭐⭐ | 中 | 语义分割通用场景 |
+| **PSPNet** | ⚡⚡ | ⭐⭐⭐⭐ | 中 | 场景理解 |
+| **SegFormer** | ⚡⚡⚡ | ⭐⭐⭐⭐⭐ | 中 | 复杂光照、Transformer 鲁棒 |
 
 ---
 
-## 🌐 Web 统一界面（推荐）
+## 📝 常见问题
 
-运行下面命令即可打开浏览器使用统一的 Web 界面：
+<details>
+<summary><b>Q: 启动报 "No module named 'mmcv'"？</b></summary>
+
+说明当前 Python 不是 openmmlab 环境，请用完整路径启动：
 
 ```bash
-python web_ui.py
+E:\anaconda3\envs\openmmlab\python.exe web_ui.py
 ```
+</details>
 
-访问 `http://localhost:7860`，支持：
-- ✅ **模型选择** — 在 4 个模型间自由切换
-- ✅ **图片分割** — 上传图片，一键分割
-- ✅ **视频分割** — 上传视频，逐帧处理并导出
-- ✅ **摄像头实时分割** — 打开摄像头实时预览
-- ✅ **结果保存** — 分割图片可保存到 `outputs/` 目录
-- ✅ **日志面板** — 记录每次处理的详细信息
+<details>
+<summary><b>Q: YOLO 加载报 "Can't get attribute 'C3k2'"？</b></summary>
 
-## 🛠️ 核心功能亮点
+ultralytics 版本太旧。升级：
 
-- ✅ **多框架统一入口** — 一个项目中体验 YOLOv11 / Detectron2 / MMSegmentation
-- ✅ **QT 可视化界面** — `main10.py` / `main12.py`，加载模型实时推理
-- ✅ **Web 统一界面** — `web_ui.py`，Gradio 构建，浏览器即可使用
-- ✅ **自动标注工具** — 利用预训练模型 + SAM 生成训练标注，减少人工成本
-- ✅ **部署示例** — ONNX Runtime / OpenVINO / TFLite 等多平台推理
-- ✅ **对比分析** — 同一数据集、统一指标，公平对比各算法
+```bash
+conda activate openmmlab
+pip install ultralytics --upgrade
+```
+</details>
 
----
+<details>
+<summary><b>Q: 端口 7860 被占用？</b></summary>
 
-## 📝 注意事项
+```bash
+# 查看占用进程
+netstat -ano | findstr 7860
 
-- 数据集（煤矿标注图片）和模型权重文件（`.pt` / `.pth` / `.pkl`）**未包含**在本仓库中，请自行准备
-- `mmsegmentation-main/20230816_*` 为 MMSegmentation 教程 notebooks，已从仓库排除
-- 每个子目录下有独立的 `README.md`，包含更详细的说明
+# 杀掉进程（替换 PID）
+taskkill /F /PID <进程ID>
+
+# 或换端口启动，编辑 web_ui.py 最后一行的 server_port
+```
+</details>
+
+<details>
+<summary><b>Q: 图片上传后分割结果空白？</b></summary>
+
+- 检查日志面板，确认模型是否加载成功
+- 确认模型权重文件路径存在（启动时会自动校验）
+- 确认图片格式正常（支持 jpg/png/bmp）
+</details>
 
 ---
 
@@ -213,6 +250,6 @@ python web_ui.py
 
 ---
 
-**👨‍🎓 作者：** 小夏  
+**👨‍🎓 作者：** lzy  
 **📅 时间：** 2025  
 **🔗 GitHub：** [LIUZHIYON/image-segmentation-algorithm-analysis](https://github.com/LIUZHIYON/image-segmentation-algorithm-analysis)
