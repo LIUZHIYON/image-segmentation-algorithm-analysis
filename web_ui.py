@@ -594,7 +594,7 @@ footer, header { display: none !important; }
 .gr-textbox textarea {
   font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
   font-size: 13px !important; line-height: 1.7 !important;
-  color: #00ff41 !important;
+  color: #ffffff !important;
   background: #0d1117 !important;
 }
 
