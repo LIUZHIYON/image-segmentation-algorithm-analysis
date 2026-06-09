@@ -56,3 +56,17 @@ mmsegmentation-main/2.jpg
 mmsegmentation-main/3.jpg
 mmsegmentation-main/CITATION.cff
 mmsegmentation-main/LICENSE
+
+# yolov11_custom_segmentation 其他main文件 (只保留main12)
+yolov11_custom_segmentation/main.py
+yolov11_custom_segmentation/main2.py
+yolov11_custom_segmentation/main3.py
+yolov11_custom_segmentation/main4.py
+yolov11_custom_segmentation/main5.py
+yolov11_custom_segmentation/main7.py
+yolov11_custom_segmentation/main7_1.py
+yolov11_custom_segmentation/main8.py
+yolov11_custom_segmentation/main9.py
+yolov11_custom_segmentation/main10.py
+yolov11_custom_segmentation/main11.py
+yolov11_custom_segmentation/mian6.py
