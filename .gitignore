@@ -70,3 +70,14 @@ yolov11_custom_segmentation/main9.py
 yolov11_custom_segmentation/main10.py
 yolov11_custom_segmentation/main11.py
 yolov11_custom_segmentation/mian6.py
+
+# mmsegmentation-main 其他main文件 (只保留main10)
+mmsegmentation-main/main.py
+mmsegmentation-main/main2.py
+mmsegmentation-main/main3.py
+mmsegmentation-main/main4.py
+mmsegmentation-main/main5.py
+mmsegmentation-main/main6.py
+mmsegmentation-main/main7.py
+mmsegmentation-main/main8.py
+mmsegmentation-main/main9.py
