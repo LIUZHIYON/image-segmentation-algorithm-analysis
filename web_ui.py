@@ -506,7 +506,7 @@ def build_app():
                     # ===== Tab3: 摄像头 =====
                     with gr.TabItem("📹 摄像头实时分割", id="webcam"):
                         gr.Markdown("##### 选择模型后打开摄像头，实时查看分割效果")
-                        webcam_input = gr.Image(source="webcam", streaming=True, label="摄像头", height=400)
+                        webcam_input = gr.Image(sources=["webcam"], streaming=True, label="摄像头", height=400)
                         webcam_output = gr.Image(label="分割结果", height=400)
 
                 # ── 日志面板 ──
