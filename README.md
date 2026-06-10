@@ -147,7 +147,9 @@ E:\anaconda3\envs\openmmlab\python.exe web_ui.py
 
 ### 5️⃣ 使用界面
 
-![Web界面截图](assets/web_screenshot.png)
+![主界面语义分割效果](assets/主界面语义分割效果.png)
+
+![主界面实例分割效果](assets/主界面实例分割效果.png)
 
 | 功能 | 操作 |
 |------|------|
